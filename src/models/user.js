@@ -1,10 +1,17 @@
 import * as services from "@/services/user";
 
+// 实现extend函数集成base模型的update方法
+
+// const extend = () => {};
+
+// const extendModel = extend(base, {
+//   state: {},
+//   effects: {},
+// })
+
 export default {
   namespace: "user",
-  state: {
-    name: "张三",
-  },
+  state: {},
   reducers: {
     update(state, { payload = {} }) {
       return {
@@ -14,8 +21,14 @@ export default {
     },
   },
   effects: {
-    *init({ payload }, { call }) {
-      const data = yield call(services.getUserInfo);
+    *init({ payload }, { call, put }) {
+      const { data } = yield call(services.getUserInfo);
+      yield put({
+        type: "update",
+        payload: {
+          ...data,
+        },
+      });
     },
   },
 };

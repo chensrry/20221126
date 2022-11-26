@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "cross-env NODE_ENV=development roadhog dev",
-    "build": "cross-env NODE_ENV=production roadog build"
+    "build": "cross-env NODE_ENV=production roadhog build"
   },
   "dependencies": {
     "antd": "4.24.4",

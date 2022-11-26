@@ -10,15 +10,6 @@ export default {
     [
       "import",
       {
-        libraryName: "antd",
-        libraryDirectory: "es",
-        style: true,
-      },
-      "antd",
-    ],
-    [
-      "import",
-      {
         libraryName: "lodash",
         libraryDirectory: "",
         camel2DashComponentName: false, // default: true

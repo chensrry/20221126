@@ -1,5 +1,12 @@
+import { makeResponse, checkRole } from "./utils";
+
 export default {
-  "/api/hello"(req, res) {
-    res.end(`hello ${Math.random()}`);
+  "/api/user/info": async function (req, res) {
+    await checkRole(req, res);
+    res.send(
+      makeResponse({
+        userName: "derrik",
+      })
+    );
   },
 };

@@ -1,8 +1,9 @@
 import React from "react";
-
+import { useSelector } from "dva";
 import style from "./header.less";
 
 export default () => {
+  const { userName } = useSelector((state) => state.user);
   return (
     <header className={style.header}>
       <div className={style.header_contonten}>
@@ -11,7 +12,7 @@ export default () => {
           <a>产品</a>
           <a>合约中心</a>
         </div>
-        <div className={style.header_action}></div>
+        <div className={style.header_action}>{userName}</div>
       </div>
     </header>
   );

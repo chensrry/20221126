@@ -2,25 +2,74 @@ import React from "react";
 
 import { router } from "dva";
 
-import HomePage from "./pages/homePage";
-
-import ConCenter from "./pages/conCenter";
 import Layout from "./layout/index";
 
-import Services from "./pages/services";
+const { Router, Route, Switch, Redirect } = router;
 
-const { BrowserRouter, Route, Switch } = router;
+const routers = [
+  {
+    path: "/",
+    component: () => import("./pages/homePage"),
+  },
+  {
+    path: "/con-center",
+    component: () => import("./pages/conCenter"),
+  },
+  {
+    path: "/services",
+    component: () => import("./pages/services"),
+  },
+  {
+    path: "/cons",
+    component: () => import("./pages/cons"),
+  },
+  {
+    path: "/blocks",
+    component: () => import("./pages/blocks"),
+  },
+];
+
+const asyncLoader = (loader) => {
+  return class extends React.Component {
+    state = {
+      Comps: null,
+    };
+    componentDidMount() {
+      loader().then(({ default: Comps }) => {
+        this.setState({
+          Comps,
+        });
+      });
+    }
+    render() {
+      const { Comps } = this.state;
+      if (Comps) {
+        return <Comps {...this.props} />;
+      } else {
+        return null;
+      }
+    }
+  };
+};
 
 export default ({ app, history }) => {
   return (
-    <BrowserRouter history={history}>
+    <Router history={history}>
       <Layout>
         <Switch>
-          <Route path="/" component={HomePage} exact />
-          <Route path="/con-center" component={ConCenter} exact />
-          <Route path="/services" component={Services} exact />
+          {routers.map(({ path, component }) => {
+            return (
+              <Route path={path} component={asyncLoader(component)} exact />
+            );
+          })}
+          <Route
+            path="*"
+            component={() => {
+              <Redirect to="/" />;
+            }}
+          />
         </Switch>
       </Layout>
-    </BrowserRouter>
+    </Router>
   );
 };
