@@ -1,0 +1,42 @@
+.header{
+    position: sticky;
+    background: #F7F8FC;
+    .header_contonten{
+        width: 1200px;
+        margin: auto;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .header_memu{
+            a{
+                font-size: 14px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: #000000;
+                margin: 0 12px;
+                cursor: pointer;
+                position: relative;
+                height: 80px;
+                line-height: 80px;
+                &::after{
+                    position: absolute;
+                    content: ' ';
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    height: 1px;
+                    background: #FF5A2D;
+                    opacity: 0;
+                }
+                &.active{
+                    color: #FF5A2D;
+                    &::after{
+                        opacity: 1;
+                    }
+        
+                }
+            }
+        }
+    }
+}

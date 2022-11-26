@@ -1,7 +1,11 @@
 import React from "react";
 
-import ReactDOM from "react-dom";
+import "./global.less";
 
-import App from "./pages/index";
+import app from "./utils/app";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+app.model(require("./models/user").default);
+
+app.router(require("./router").default);
+
+app.start("#root");
