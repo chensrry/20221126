@@ -4,6 +4,8 @@ import { router } from "dva";
 
 import Layout from "./layout/index";
 
+import loadable from "./utils/loadable";
+
 const { Router, Route, Switch, Redirect } = router;
 
 const routers = [
@@ -22,44 +24,32 @@ const routers = [
   {
     path: "/cons",
     component: () => import("./pages/cons"),
+    models: () => [import("./models/services")],
   },
   {
     path: "/blocks",
     component: () => import("./pages/blocks"),
+    models: () => [import("./models/blocks")],
   },
 ];
-
-const asyncLoader = (loader) => {
-  return class extends React.Component {
-    state = {
-      Comps: null,
-    };
-    componentDidMount() {
-      loader().then(({ default: Comps }) => {
-        this.setState({
-          Comps,
-        });
-      });
-    }
-    render() {
-      const { Comps } = this.state;
-      if (Comps) {
-        return <Comps {...this.props} />;
-      } else {
-        return null;
-      }
-    }
-  };
-};
 
 export default ({ app, history }) => {
   return (
     <Router history={history}>
       <Layout>
         <Switch>
-          {routers.map(({ path, component }) => {
+          {routers.map(({ path, component, models }) => {
             return (
-              <Route path={path} component={asyncLoader(component)} exact />
+              <Route
+                key={path}
+                path={path}
+                component={loadable({
+                  app,
+                  component,
+                  models,
+                })}
+                exact
+              />
             );
           })}
           <Route

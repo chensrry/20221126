@@ -21,8 +21,10 @@ export default () => {
               <li>快速构建区块链网络</li>
               <li>48小时试用，到期自动释放</li>
             </ul>
-            <div className="mt-8">
-              <Button type="primary">开始使用</Button>
+            <div style={{ overflow: "hidden" }}>
+              <div className="mt-8">
+                <Button type="primary">开始使用</Button>
+              </div>
             </div>
           </div>
           <div className={style.content_item}>
@@ -35,8 +37,10 @@ export default () => {
               <li>可视化控制台，动态管理网络及成员配置</li>
               <li>付费使用，长期有效</li>
             </ul>
-            <div className="mt-8">
-              <Button type="primary">开始使用</Button>
+            <div style={{ overflow: "hidden" }}>
+              <div className="mt-8">
+                <Button type="primary">开始使用</Button>
+              </div>
             </div>
           </div>
         </div>

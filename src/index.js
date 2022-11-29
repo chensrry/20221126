@@ -7,8 +7,8 @@ import "antd/dist/antd.min.css";
 import app from "./utils/app";
 
 app.model(require("./models/user").default);
-app.model(require("./models/services").default);
-app.model(require("./models/blocks").default);
+// app.model(require("./models/services").default);
+// app.model(require("./models/blocks").default);
 
 app.router(require("./router").default);
 
