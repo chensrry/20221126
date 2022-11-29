@@ -1,17 +1,12 @@
 import * as services from "@/services/services";
 
-export default {
+import extendModel from "../utils/extendModel";
+import base from "./base";
+
+export default extendModel(base, {
   namespace: "services",
   state: {
     list: [],
-  },
-  reducers: {
-    update(state, { payload }) {
-      return {
-        ...state,
-        ...payload,
-      };
-    },
   },
   effects: {
     *init({ payload }, { put, call }) {
@@ -35,4 +30,4 @@ export default {
       });
     },
   },
-};
+});

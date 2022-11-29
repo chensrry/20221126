@@ -9,17 +9,12 @@ import * as services from "@/services/user";
 //   effects: {},
 // })
 
-export default {
+import extendModel from "../utils/extendModel";
+import base from "./base";
+
+export default extendModel(base, {
   namespace: "user",
   state: {},
-  reducers: {
-    update(state, { payload = {} }) {
-      return {
-        ...state,
-        ...payload,
-      };
-    },
-  },
   effects: {
     *init({ payload }, { call, put }) {
       const { data } = yield call(services.getUserInfo);
@@ -31,4 +26,4 @@ export default {
       });
     },
   },
-};
+});
